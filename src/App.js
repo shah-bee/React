@@ -1,50 +1,49 @@
 import React, { Component } from 'react';
-// import Person from './Person/Person';
-import Input from './Lab-01/Input/Input';
-import Output from './Lab-01/Output/Output';
+import Validation from './Lab-02/Validation';
+import Char from './Lab-02/Char';
 import './App.css';
 
 class App extends Component {
-  state = {
-    persons: [
-      { name: "Asra", age: 8 },
-      { name: "Amera", age: 5 },
-      { name: "Umar", age: 6 },
-      { name: "Amaan", age: 12 }
-    ],
-    userName: "Taher"
-  }
+ state =  {
+   name : "",
+   length: 0
+ }
+  
+ onInputChange = (event) => {
+  const inputLength = event.target.value.length;
+   this.setState({
+      name : event.target.value,
+      length : inputLength
+   });
+ }
 
-  switchNameHandler = (newName) => {
-    console.log('switch clicked!');
-
-    this.setState({
-      persons: [
-        { name: newName, age: 8 },
-        { name: "Amera Firdaus", age: 5 },
-        { name: "Mohammed Umar", age: 6 }]
-    });
-  }
-
-  onUserNameChangedHandler = (event) => {
-    this.setState({
-        userName: event.target.value
-    });
-  }
-
+ removeChar = (index) => {
+ // console.log(event.target.innerText, index);
+  let updateName = this.state.name.split('');
+ updateName.splice(index, 1);
+ const updatedName = updateName.join('');
+  this.setState({
+    name: updatedName
+  })
+  console.log(updateName, index);
+ }
 
   render() {
+
+    const charArray =  
+         this.state.name.split('').map((char, index) => {
+          return <Char char={char} key={index} click={() => this.removeChar(index)}></Char>
+          })
+
     return (
       <div className="App">
-        <h1>Hi, I'm a React App!</h1>
-        {/* <button onClick={() => this.switchNameHandler('Naseer')}>Switch Name</button>
-        <Person name={this.state.persons[0].name} click={this.switchNameHandler.bind(this, 'Taher')} age={this.state.persons[0].age} />
-        <Person name={this.state.persons[1].name} age={this.state.persons[1].age} />
-        <Person name={this.state.persons[2].name} age={this.state.persons[2].age} >
-          I'm a software developer!
-        </Person> */}
-        <Input nameChange={this.onUserNameChangedHandler} name={this.state.userName}></Input>
-        <Output name={this.state.userName}></Output>
+        <h1>Hi I am working on assignment 3!</h1>
+       <input type="text" value={this.state.name} onChange={this.onInputChange} />
+       <p>
+         {this.state.name}
+       </p>
+       <Validation length={this.state.length}></Validation>
+      {charArray}
       </div>
     );
   }
