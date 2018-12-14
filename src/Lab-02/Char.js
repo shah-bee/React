@@ -1,18 +1,18 @@
 import React from 'react';
+import Radium from 'radium';
+import './Char.css';
 
 const char = (props) => {
 
     const style = {
-        display : 'inline-block',
-        margin: '10px',
-        padding: '16px',
-        border: '1px solid black',
-        textAlign: 'center'
+      '@media (min-width: 500px)' : {
+          width : '450px'
+      }
     }
 
-    return <div style={style} onClick={props.click}>
+    return <div className="char" style={style} onClick={props.click}>
        {props.char}
     </div>
 }
 
-export default char;
+export default Radium(char);
