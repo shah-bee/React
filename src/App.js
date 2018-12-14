@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Validation from './Lab-02/Validation';
 import Char from './Lab-02/Char';
+import Radium from 'radium';
 import './App.css';
 
 class App extends Component {
@@ -29,15 +30,35 @@ class App extends Component {
  }
 
   render() {
+    const style = {
+      backgroundColor: "green",
+      margin: "10px",
+      padding : "10px",
+      color: "white",
+      ':hover': {
+        backgroundColor : "red"
+      }
+    }
+
+    let classes = [];
 
     const charArray =  
          this.state.name.split('').map((char, index) => {
           return <Char char={char} key={index} click={() => this.removeChar(index)}></Char>
-          })
+          });
+    
+          if(this.state.name.split('').length <= 2){
+            classes.push("red");
+          }
+      
+          if(this.state.name.split('').length >= 2){
+            classes.push("red bold");
+          }
 
     return (
       <div className="App">
-        <h1>Hi I am working on assignment 3!</h1>
+      <button style={style} >Toggle!</button>
+        <p className={classes}>Hi, I am working on assignment 3!</p>
        <input type="text" value={this.state.name} onChange={this.onInputChange} />
        <p>
          {this.state.name}
@@ -49,4 +70,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Radium(App);
