@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import Validation from './Lab-02/Validation';
 import Char from './Lab-02/Char';
-import Radium, { StyleRoot } from 'radium';
-import './App.css';
+import Classes from './App.css';
 
 class App extends Component {
   state = {
@@ -30,15 +29,7 @@ class App extends Component {
   }
 
   render() {
-    const style = {
-      backgroundColor: "green",
-      margin: "10px",
-      padding: "10px",
-      color: "white",
-      ':hover': {
-        backgroundColor: "red"
-      }
-    }
+    
 
     let classes = [];
 
@@ -48,28 +39,26 @@ class App extends Component {
       });
 
     if (this.state.name.split('').length <= 2) {
-      classes.push("red");
+      classes.push(Classes.red);
     }
 
     if (this.state.name.split('').length >= 2) {
-      classes.push("red bold");
+      classes.push(Classes.bold);
     }
 
     return (
-      <StyleRoot>
-        <div className="App">
-          <button style={style} >Toggle!</button>
-          <p className={classes}>Hi, I am working on assignment 3!</p>
-          <input type="text" value={this.state.name} onChange={this.onInputChange} />
-          <p>
-            {this.state.name}
-          </p>
-          <Validation length={this.state.length}></Validation>
-          {charArray}
-        </div>
-      </StyleRoot>
+      <div className={Classes.App}>
+        <button style={style} >Toggle!</button>
+        <p className={classes.join(' ')}>Hi, I am working on assignment 3!</p>
+        <input type="text" value={this.state.name} onChange={this.onInputChange} />
+        <p>
+          {this.state.name}
+        </p>
+        <Validation length={this.state.length}></Validation>
+        {charArray}
+      </div>
     );
   }
 }
 
-export default Radium(App);
+export default App;

@@ -7,6 +7,16 @@
   height: 40vmin;
 }
 
+ .App button{
+  background-color: green;
+  margin: 10px;
+  padding: 10px;
+  color: white;
+  }
+
+  .App button.red:hover {
+    background-color: red;
+  }
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
